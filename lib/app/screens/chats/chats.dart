@@ -1,90 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/app/data/data.dart';
+import 'package:whatsapp_clone/app/screens/chats/list_chat_item.dart';
 
-class Chats extends StatelessWidget {
+class Chats extends StatefulWidget {
+  @override
+  _ChatsState createState() => _ChatsState();
+}
+
+class _ChatsState extends State<Chats> {
+  List<Map<String, dynamic>> jsonData;
+
+  initState() {
+    super.initState();
+    this.setState(() {
+      this.jsonData = new Data().getChats();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: ListView.builder(
         padding: const EdgeInsets.only(bottom: 80.0),
-        children: <Widget>[
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-          ListItem(),
-        ],
+        itemCount: jsonData.length,
+        itemBuilder: (context, index) {
+          var chat = jsonData[index];
+          return ListChatItem(
+            image: chat["image"],
+            name: chat["name"],
+            type: chat["type"],
+            sendBy: chat["send_by"],
+            lastMessage: chat["last_message"],
+            timestamp: chat["timestamp"],
+            status: chat["status"],
+            unread: chat["unread"],
+          );
+        },
       ),
     );
   }
 }
 
-class ListItem extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 60,
-            width: 60,
-            margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-          ),
-          Container(
-            width: size.width - 102,
-            height: 70,
-            margin: const EdgeInsets.only(right: 12.0),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey[400], width: 1.0,),
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("Pessoa 01", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 19.0),),
-                    Text("12:02", style: TextStyle(color: Colors.grey[700], fontSize: 14.0),),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("Obrigado.", style: TextStyle(color: Colors.grey[700], fontSize: 18.0,),),
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      margin: const EdgeInsets.only(right: 5.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle
-                      ),
-                      child: Text("1", style: TextStyle(color: Colors.white, fontSize: 13.0),),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
