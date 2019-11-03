@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/app/screens/chats/chats.dart';
 
 class App extends StatefulWidget {
   @override
@@ -12,8 +13,11 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     this.indexPage = 1;
-    this._tabController =
-        TabController(vsync: this, length: 4, initialIndex: this.indexPage);
+    this._tabController = TabController(
+      vsync: this,
+      length: 4,
+      initialIndex: this.indexPage,
+    );
     super.initState();
   }
 
@@ -99,12 +103,18 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                 Row(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                      child: Icon(Icons.search, size: 26.0,),
+                      padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                      child: Icon(
+                        Icons.search,
+                        size: 26.0,
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                      child: Icon(Icons.more_vert, size: 26.0,),
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: Icon(
+                        Icons.more_vert,
+                        size: 26.0,
+                      ),
                     ),
                   ],
                 ),
@@ -120,11 +130,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
               width: size.width,
               height: size.height,
             ),
-            Container(
-              color: Colors.green,
-              width: size.width,
-              height: size.height,
-            ),
+            Chats(),
             Container(
               color: Colors.yellow,
               width: size.width,
@@ -136,6 +142,13 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
               height: size.height,
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green[400],
+          onPressed: () {
+            print("floating button");
+          },
+          child: Icon(Icons.message, size: 24.0,),
         ),
       ),
     );
