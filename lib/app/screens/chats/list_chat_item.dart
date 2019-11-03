@@ -41,12 +41,12 @@ class ListChatItem extends StatelessWidget {
           ),
           Container(
             width: size.width - 102,
-            height: 70,
+            height: 80,
             margin: const EdgeInsets.only(right: 12.0),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.grey[400],
+                  color: Colors.grey[300],
                   width: 1.0,
                 ),
               ),
@@ -54,19 +54,22 @@ class ListChatItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      this.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 19.0),
-                    ),
-                    Text(
-                      this.timestamp,
-                      style: TextStyle(color: Colors.grey[700], fontSize: 14.0),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 3.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        this.name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18.0),
+                      ),
+                      Text(
+                        this.timestamp,
+                        style: TextStyle(color: Colors.grey[500], fontSize: 13.0),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,8 +88,8 @@ class ListChatItem extends StatelessWidget {
                               Text(
                                 this.lastMessage,
                                 style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 18.0,
+                                  color: Colors.grey[500],
+                                  fontSize: 16.0,
                                 ),
                               ),
                             ],
@@ -96,31 +99,60 @@ class ListChatItem extends StatelessWidget {
                                 ? this.sendBy + ": " + this.lastMessage
                                 : this.lastMessage,
                             style: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 18.0,
+                              color: Colors.grey[500],
+                              fontSize: 16.0,
                             ),
                           ),
-                    (this.unread > 0)
-                        ? Container(
-                            // padding: const EdgeInsets.all(8.0),
-                            height: 21.0,
-                            width: 22.0,
-                            margin: const EdgeInsets.only(right: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: Text(
-                                this.unread.toString(),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.0,
+                    Row(
+                      children: <Widget>[
+                        (this.status != "none")
+                            ? ((this.status == "pinned")
+                                ? Container(
+                                    height: 21.0,
+                                    width: 22.0,
+                                    margin: const EdgeInsets.only(right: 5.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[400],
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: Icon(Icons.lock, size: 13.0, color: Colors.white,)
+                                    ),
+                                  )
+                                : Container(
+                                    height: 21.0,
+                                    width: 22.0,
+                                    margin: const EdgeInsets.only(right: 5.0),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: Icon(Icons.volume_off, size: 18.0, color: Colors.grey[400],)
+                                    ),
+                                  ))
+                            : Container(),
+                        (this.unread > 0)
+                            ? Container(
+                                height: 21.0,
+                                width: 22.0,
+                                margin: const EdgeInsets.only(right: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
                                 ),
-                              ),
-                            ),
-                          )
-                        : Container()
+                                child: Center(
+                                  child: Text(
+                                    this.unread.toString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ],
+                    ),
                   ],
                 ),
               ],
