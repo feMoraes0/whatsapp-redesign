@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class App extends StatefulWidget {
   @override
   _AppState createState() => _AppState();
@@ -13,7 +12,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     this.indexPage = 1;
-    this._tabController = TabController(vsync: this, length: 4, initialIndex: this.indexPage);
+    this._tabController =
+        TabController(vsync: this, length: 4, initialIndex: this.indexPage);
     super.initState();
   }
 
@@ -50,7 +50,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                     "CHATS",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: (this.indexPage == 1) ? Colors.white : Colors.white70,
+                      color:
+                          (this.indexPage == 1) ? Colors.white : Colors.white70,
                     ),
                   ),
                 ),
@@ -63,7 +64,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                     "STATUS",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: (this.indexPage == 2) ? Colors.white : Colors.white70,
+                      color:
+                          (this.indexPage == 2) ? Colors.white : Colors.white70,
                     ),
                   ),
                 ),
@@ -76,7 +78,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                     "CALLS",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: (this.indexPage == 3) ? Colors.white : Colors.white70,
+                      color:
+                          (this.indexPage == 3) ? Colors.white : Colors.white70,
                     ),
                   ),
                 ),
@@ -87,7 +90,25 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
           ),
           title: Container(
             child: Row(
-              children: <Widget>[Text("WhatsApp")],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "WhatsApp",
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
+                ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Icon(Icons.search, size: 26.0,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Icon(Icons.more_vert, size: 26.0,),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
