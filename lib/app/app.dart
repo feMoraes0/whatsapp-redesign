@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/app/screens/chats/chats.dart';
+import 'package:whatsapp_clone/app/screens/status/status.dart';
 
 class App extends StatefulWidget {
   @override
@@ -131,11 +132,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
               height: size.height,
             ),
             Chats(),
-            Container(
-              color: Colors.yellow,
-              width: size.width,
-              height: size.height,
-            ),
+            Status(),
             Container(
               color: Colors.blue,
               width: size.width,
@@ -148,7 +145,10 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
           onPressed: () {
             print("floating button");
           },
-          child: Icon(Icons.message, size: 24.0,),
+          child: Icon(
+            Icons.message,
+            size: 24.0,
+          ),
         ),
       ),
     );
