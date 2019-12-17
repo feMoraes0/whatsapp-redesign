@@ -108,87 +108,146 @@ class Chats extends StatelessWidget {
     },
   ];
 
-  Widget renderChat(Map<String, dynamic> chat, ThemeData theme) {
+  Widget callSwipe(ThemeData theme) {
     return Container(
-      padding: const EdgeInsets.all(15.0),
+      color: Colors.transparent,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
-            height: 60.0,
-            width: 60.0,
+            margin: const EdgeInsets.only(left: 20.0),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(chat['image']),
-                fit: BoxFit.cover,
-              ),
+              color: theme.primaryColor,
               shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[300],
+                  blurRadius: 4.0,
+                  offset: Offset(4.0, 4.0),
+                )
+              ]
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 12.0,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        chat['name'],
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      (chat['unread'] > 0) ? Container(
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: BoxDecoration(
-                          color: theme.primaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          '${chat['unread']}',
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ) : Container(),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          chat['message'],
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          chat['hour'],
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.video_call, size: 25.0, color: Colors.white,),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget messageSwipe(ThemeData theme) {
+    return Container(
+      color: Colors.transparent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(right: 20.0),
+            decoration: BoxDecoration(
+              color: theme.primaryColor,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[300],
+                  blurRadius: 4.0,
+                  offset: Offset(4.0, 4.0),
+                )
+              ]
+            ),
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.phone, size: 25.0, color: Colors.white,),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget renderChat(Map<String, dynamic> chat, ThemeData theme) {
+    return Dismissible(
+      key: Key(chat['name']),
+      background: this.callSwipe(theme),
+      secondaryBackground: this.messageSwipe(theme),
+      child: Container(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          children: <Widget>[
+            Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(chat['image']),
+                  fit: BoxFit.cover,
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 12.0,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          chat['name'],
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        (chat['unread'] > 0) ? Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: theme.primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            '${chat['unread']}',
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ) : Container(),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            chat['message'],
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            chat['hour'],
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
