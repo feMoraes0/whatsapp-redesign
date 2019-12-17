@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/app/chats/chats.dart';
 
 class App extends StatefulWidget {
   @override
@@ -26,9 +27,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: this._tabController,
         children: <Widget>[
-          SafeArea(
-            child: Container(),
-          ),
+          Chats(),
           Container(),
           Container(),
           Container(),
